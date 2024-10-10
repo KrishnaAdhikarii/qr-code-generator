@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000"||process.env.REACT_APP_BACKEND_URL, // Change this to point to your backend
+  baseURL: "http://localhost:10000"||process.env.REACT_APP_BACKEND_URL, // Change this to point to your backend
 });
 
 export const generateQRCode = async (data) => {
