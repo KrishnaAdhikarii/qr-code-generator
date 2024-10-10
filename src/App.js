@@ -1,17 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home"; // Make sure this path is correct
-import QRCodeDisplay from "./pages/QRCodeDisplay"; // Assuming you have a QR code display page
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import QRCodeDisplay from "./pages/QRCodeDisplay"; // Adjust the import based on your structure
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} /> {/* Route for the homepage */}
-        <Route path="/qr-code" element={<QRCodeDisplay />} /> {/* Route for displaying the QR code */}
+        <Route path="/" element={<Home />} />
+        <Route path="/qr-code" element={<QRCodeDisplay />} />
       </Routes>
-    </Router> 
+    </Router>
   );
-};
+}
 
 export default App;

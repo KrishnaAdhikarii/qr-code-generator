@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Use useNavigate instead of useHistory
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
-
-function QRForm() {
+function QRForm({ setQrCodeUrl }) { // Receive setQrCodeUrl as a prop
   const [formData, setFormData] = useState({
     text: "",
     color: "#000000",
@@ -20,14 +19,19 @@ function QRForm() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const generateQRCode = async (formData) => {
+  const generateQRCode = async (e) => {
+    e.preventDefault();
     try {
       const response = await axios.post(`${backendUrl}/api/generate-qr`, formData);
-      // Handle response, like updating QR code URL state
+      setQrCodeUrl(response.data.qrCodeUrl);
+      
+      // Navigate to QRCodeDisplay with the generated QR code URL
+      navigate("/qr-code", { state: { qrCodeUrl: response.data.qrCodeUrl } });
     } catch (error) {
       console.error("Error generating QR code:", error);
     }
   };
+  
 
   return (
     <form onSubmit={generateQRCode} className="qr-form">
